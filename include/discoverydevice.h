@@ -51,23 +51,23 @@ typedef struct {
     time_t interval=1;
     time_t recv_timeout=1;
     Message message;
-    struct sockaddr_in broadcast_addr;
+    struct sockaddr_in device_addr;
     std::vector<Dev> devs;
     std::vector<Callback> callbacks;
     pthread_t receiver_thread;
 } Device;
 
-void *broadcast(void *arg);
-void run_callbacks(Device *device,int type);
+// void *broadcast(void *arg);
+// void run_callbacks(Device *device,int type);
 
-void sender(Device *device);
-int discovery_initdevice(Device* server,in_port_t port,Message *msg);
-void discovery_start_broadcast(Device *device);
-void discovery_stop(Device *device);
+// void sender(Device *device);
+void discovery_initDevice(Device &device,in_port_t port,Message &msg);
+// void discovery_start_broadcast(Device *device);
+// void discovery_stop(Device *device);
 
-void checkAlive(Device *device);
-void *receiver(void *arg);
-void register_callback(Device *device,Callback callback);
+// void checkAlive(Device *device);
+// void *receiver(void *arg);
+// void register_callback(Device *device,Callback callback);
 
 #endif
 

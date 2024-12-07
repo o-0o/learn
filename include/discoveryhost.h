@@ -3,13 +3,13 @@
 #include <sys/socket.h>
 #include <memory.h>
 #include <arpa/inet.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <signal.h>
 #include <sys/time.h>
 #include <iostream>
+#include <sys/ioctl.h>
+#include <net/if.h>
 #include <vector>
 
 #define PORT 12345
@@ -53,13 +53,9 @@ typedef struct {
     pthread_t receiver_thread;
 } Host;
 
-void *scan(void *arg);
-void run_callbacks(Host *host,int type,void *arg,void *msg);
-void discovery_scan_device_loop(Host *host);
-int  discovery_initHost(Host* host,in_port_t port);
-void discovery_scan_device(Host *host);
-void checkAlive(Host *host);
-void *receiver(void *arg);
-void register_callback(Host *host,Callback callback);
+void discovery_initHost(Host &host,in_port_t port);
+bool host_broadcast(Host &host);
+void print_device_list(Host &host);
 
+// void register_callback(Host &host,Callback callback);
 #endif
